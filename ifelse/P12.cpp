@@ -1,31 +1,40 @@
-// 11. Input two numbers and print which one is larger.
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     int time = 20;
+
+//     if (time < 18) {
+//         cout << "Good day.";
+//     } else {
+//         cout << "Good evening.";
+//     }
+
+//     return 0;
+// }
 
 
-#include<iostream>
+
+
+
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    int a;
-    int b;
-    
-    cout<<"Enter first Number"<<endl;
-    cin>>a;
-    
-    cout<<"Enter second Number"<<endl;
-    cin>>b;
-    
-    if(a>b)
-    {
-        cout<<"a is Largest Number";
+int main() {
+    int time = 16;
+
+    bool isMorning = time < 12;
+    bool isDay = time < 18;
+
+    if (isMorning) {
+        cout << "Good morning.";
+    } 
+    else if (isDay) {
+        cout << "Good day.";
+    } 
+    else {
+        cout << "Good evening.";
     }
-    else if(b>a)
-    {
-        cout<<"b is largest Number";
-    }
-    else
-    {
-        cout<<"Both Numbers are equal";
-    }
+
     return 0;
 }
