@@ -1,19 +1,19 @@
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-int main() {
-    int n, i = 1;
+// int main() {
+//     int n, i = 1;
 
-    cout << "Enter a number: ";
-    cin >> n;
+//     cout << "Enter a number: ";
+//     cin >> n;
 
-    while(i <= n) {
-        cout << i << " ";
-        i++;
-    }
+//     while(i <= n) {
+//         cout << i << " ";
+//         i++;
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 
 
