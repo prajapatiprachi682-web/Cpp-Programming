@@ -1,3 +1,11 @@
+// d
+// cd
+// bcd
+// abcd
+
+
+
+
 // #include <iostream>
 // using namespace std;
 
