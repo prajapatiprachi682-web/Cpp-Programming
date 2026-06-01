@@ -1,45 +1,39 @@
-// Remove duplicates from sorfted Array
+// Remove duplicates from sorted array
 
 
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
-class Solution
+int removeDuplicates(int arr[], int n)
 {
-public:
-    int removeDuplicates(vector<int> &arr, int n)
+    int temp[100];
+    int k = 0;
+
+    temp[k++] = arr[0];
+
+    for(int i = 1; i < n; i++)
     {
-        vector<int> temp;
-
-        temp.push_back(arr[0]);
-
-        for(int i = 1; i < n; i++)
+        if(arr[i] != arr[i - 1])
         {
-            if(arr[i] != arr[i - 1])
-            {
-                temp.push_back(arr[i]);
-            }
+            temp[k++] = arr[i];
         }
-
-        for(int i = 0; i < temp.size(); i++)
-        {
-            arr[i] = temp[i];
-        }
-
-        return temp.size();
     }
-};
+
+    for(int i = 0; i < k; i++)
+    {
+        arr[i] = temp[i];
+    }
+
+    return k;
+}
 
 int main()
 {
-    vector<int> arr = {1, 1, 2, 2, 3, 4, 4, 5};
-    int n = arr.size();
+    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    Solution obj;
-
-    int k = obj.removeDuplicates(arr, n);
+    int k = removeDuplicates(arr, n);
 
     cout << "Number of unique elements = " << k << endl;
 
@@ -49,8 +43,6 @@ int main()
     {
         cout << arr[i] << " ";
     }
-
-    cout << endl;
 
     return 0;
 }
