@@ -1,0 +1,71 @@
+// Lexicographically Smallest after removing k
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n)
+    {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+
+    string lexicographicallySmallest(string &s, int k)
+    {
+        int n = s.size();
+
+        if(isPowerOfTwo(n))
+        {
+            k /= 2;
+        }
+        else
+        {
+            k *= 2;
+        }
+
+        if(k >= n)
+            return "-1";
+
+        string st;
+
+        for(char ch : s)
+        {
+            while(!st.empty() && k > 0 && st.back() > ch)
+            {
+                st.pop_back();
+                k--;
+            }
+
+            st.push_back(ch);
+        }
+
+        while(k > 0 && !st.empty())
+        {
+            st.pop_back();
+            k--;
+        }
+
+        if(st.empty())
+            return "-1";
+
+        return st;
+    }
+};
+
+int main()
+{
+    string s = "cbad";
+    int k = 1;
+
+    Solution obj;
+
+    cout << "Original String : " << s << endl;
+    cout << "Answer          : "
+         << obj.lexicographicallySmallest(s, k)
+         << endl;
+
+    return 0;
+}
