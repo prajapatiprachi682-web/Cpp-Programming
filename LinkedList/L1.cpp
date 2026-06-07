@@ -11,7 +11,7 @@ public:
     Node(int val)
     {
         data = val;
-        next = nullptr;
+        next = NULL;
     }
 };
 
@@ -21,7 +21,7 @@ int getSize(Node *head)
     int count = 0;
     Node *temp = head;
 
-    while (temp != nullptr)
+    while (temp != NULL)
     {
         count++;
         temp = temp->next;
@@ -40,7 +40,7 @@ void insertAtHead(Node *&head, int val)
 
 void insertAtTail(Node *&head, int val)
 {
-    if (head == nullptr)
+    if (head == NULL)
     {
         insertAtHead(head, val);
         return;
@@ -49,7 +49,7 @@ void insertAtTail(Node *&head, int val)
     Node *newNode = new Node(val);
 
     Node *temp = head;
-    while (temp->next != nullptr)
+    while (temp->next != NULL)
     {
         temp = temp->next;
     }
@@ -98,7 +98,7 @@ void printList(Node *head)
 {
     Node *temp = head;
 
-    while (temp != nullptr)
+    while (temp != NULL)
     {
         cout << temp->data << " -> ";
         temp = temp->next;
@@ -110,7 +110,7 @@ void printList(Node *head)
 // ================= MAIN =================
 int main()
 {
-    Node *head = nullptr;
+    Node *head = NULL;
 
     insertAtHead(head, 10);
     insertAtTail(head, 20);
