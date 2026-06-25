@@ -1,8 +1,8 @@
 // ✅ Strings
-// ✅ Sorting
-// ✅ Bubble/Selection Sort Logic
-// ✅ Nested Loops
-// ✅ GFG - Sort a String
+// ✅ Character Traversal
+// ✅ Vowel Checking
+// ✅ String Filtering
+// ✅ GFG - Remove Consonants from a String
 
 
 
@@ -10,36 +10,42 @@
 
 #include <iostream>
 #include <string>
+#include <cctype>
 using namespace std;
 
 class Solution {
 public:
-    string sortString(string &s)
-    {
-        int n = s.size();
 
-        for(int i = 0; i < n - 1; i++)
+    bool isVowel(char ch)
+    {
+        ch = tolower(ch);
+
+        return ch=='a' || ch=='e' ||
+               ch=='i' || ch=='o' ||
+               ch=='u';
+    }
+
+    string remConsonants(string &s)
+    {
+        string ans;
+
+        for(char ch : s)
         {
-            for(int j = i + 1; j < n; j++)
-            {
-                if(s[i] > s[j])
-                {
-                    swap(s[i], s[j]);
-                }
-            }
+            if(isVowel(ch))
+                ans.push_back(ch);
         }
 
-        return s;
+        return ans;
     }
 };
 
 int main()
 {
-    string s = "edcab";
+    string s = "GeeksforGeeks";
 
     Solution obj;
 
-    cout << obj.sortString(s);
+    cout << obj.remConsonants(s);
 
     return 0;
 }
