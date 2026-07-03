@@ -1,20 +1,54 @@
-#include <iostream>
+//1. Linear Search in Array
+
+
+// #include<iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int arr[5] = {10, 20, 30, 40, 50};
+
+//     int key;
+//     cout << "Enter the element to search: ";
+//     cin >> key;
+
+//     for(int i = 0; i < 5; i++)
+//     {
+//         if(arr[i] == key)
+//         {
+//             cout << "Element = " << key << endl;
+//             cout << "Index = " << i << endl;
+//         }
+//     }
+
+//     return 0;
+// }
+
+
+
+
+#include<iostream>
 using namespace std;
 
 int main()
 {
-    int arr[] = {10, 20, 30, 40, 50};
-    int n = 5;
+    int arr[5] = {10, 20, 30, 40, 50};
 
-    int i = 1; // first index
-    int j = 3; // second index
+    int key, i;
 
-    swap(arr[i], arr[j]);
+    cout << "Enter key to search: ";
+    cin >> key;
 
-    for(int k = 0; k < n; k++)
+    for(i = 0; i < 5; i++)
     {
-        cout << arr[k] << " ";
+        if(arr[i] == key)
+        {
+            cout << key << " found at index " << i << endl;
+            return 0;
+        }
     }
+
+    cout << "Not Found" << endl;
 
     return 0;
 }
