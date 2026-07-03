@@ -1,84 +1,45 @@
-#include <iostream>
-using namespace std;
-
-int main() 
-{
-    int arr[] = {12, 45, 7, 89, 23};
-    int n = 5;
-
-    int min = arr[0];
-
-    for(int i = 1; i < n; i++) 
-    {
-        if(arr[i] < min) 
-        {
-            min = arr[i];
-        }
-    }
-
-    cout << "Minimum element = " << min;
-
-    return 0;
-}
+// 4. Sum of Array
 
 
-
-
-
-
-// #include <iostream>
+// #include<iostream>
 // using namespace std;
 
 // int main()
 // {
-//     int arr[5] = {6, 1, 8, 10, 3};
+//     int arr[5] = {10, 20, 30, 40, 50};
 
-//     int size = sizeof(arr) / sizeof(arr[0]);
-//     int min = arr[0];
+//     int sum = 0;
 
-//     for(int i = 0; i < size; i++)
+//     for(int i = 0; i < 5; i++)
 //     {
-//         if(min > arr[i])
-//         {
-//             min = arr[i];
-//         }
+//         sum += arr[i];
 //     }
 
-//     cout << "Minimum element: " << min << endl;
-//     cout << "Size of array: " << size << endl;
-
-//     // Printing addresses
-//     cout << &arr[0] << endl;
-//     cout << &arr[1] << endl;
-//     cout << &arr[2] << endl;
-//     cout << &arr[3] << endl;
-//     cout << &arr[4] << endl;
+//     cout << "Sum = " << sum;
 
 //     return 0;
 // }
 
 
 
+//5. Product of Array
 
 
+#include<iostream>
+using namespace std;
 
-// #include <iostream>
-// using namespace std;
+int main()
+{
+    int arr[5] = {1, 2, 3, 4, 5};
 
-// int main() {
-//     int n;
-//     cout << "Enter n: ";
-//     cin >> n;
+    int product = 1;
 
-//     int arr[n];
-//     cout << "Enter elements:\n";
-//     for(int i = 0; i < n; i++) cin >> arr[i];
+    for(int i = 0; i < 5; i++)
+    {
+        product *= arr[i];
+    }
 
-//     int min = arr[0];
-//     for(int i = 1; i < n; i++) {
-//         if(arr[i] < min) min = arr[i];
-//     }
+    cout << "Product = " << product;
 
-//     cout << "Minimum element = " << min;
-//     return 0;
-// }
+    return 0;
+}
