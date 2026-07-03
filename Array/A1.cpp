@@ -1,22 +1,12 @@
-// #include <iostream>
+// Array Declaration
+
+
+// #include<iostream>
 // using namespace std;
 
-// int main() 
+// int main()
 // {
-//     int arr[] = {12, 45, 7, 89, 23};
-//     int n = 5;
-
-//     int max = arr[0];
-
-//     for(int i = 1; i < n; i++) 
-//     {
-//         if(arr[i] > max) 
-//         {
-//             max = arr[i];
-//         }
-//     }
-
-//     cout << "Maximum element = " << max;
+//     int arr[5] = {10, 20, 30, 40, 50};
 
 //     return 0;
 // }
@@ -26,54 +16,72 @@
 
 
 
+// 2. Array Input & Output
 
-// #include <iostream>
+
+
+// #include<iostream>
 // using namespace std;
 
-// int main() {
-//     int n;
-//     cout << "Enter number of elements: ";
-//     cin >> n;
+// int main()
+// {
+//     int arr[5];
 
-//     int arr[n];
+//     cout << "Enter 5 elements:\n";
 
-//     cout << "Enter " << n << " elements:\n";
-//     for(int i = 0; i < n; i++) {
+//     for(int i = 0; i < 5; i++)
+//     {
 //         cin >> arr[i];
 //     }
 
-//     int maxElement = arr[0];  // assume first element is max
+//     cout << "Array Elements: ";
 
-//     for(int i = 1; i < n; i++) {
-//         if(arr[i] > maxElement) {
-//             maxElement = arr[i];
-//         }
+//     for(int i = 0; i < 5; i++)
+//     {
+//         cout << arr[i] << " ";
 //     }
 
-//     cout << "Maximum element = " << maxElement;
 //     return 0;
 // }
 
 
 
 
+//3. Array Traversal (Print Array)
+
+
+// #include<iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int arr[5] = {10, 20, 30, 40, 50};
+
+//     for(int i = 0; i < 5; i++)
+//     {
+//         cout << arr[i] << " ";
+//     }
+
+//     return 0;
+// }
 
 
 
-#include<iostream>
+
+// 4. Reverse Traversal
+
+#include <iostream>
 using namespace std;
 
-int main()
+int main() 
 {
-    int arr[5]={654,6754,223460987,89,7554};
-    int maxx=arr[0];
-    
-    for(int i=0;i<5;i++)
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = 5;
+
+    for(int i = n - 1; i >= 0; i--) 
     {
-        if(maxx<arr[i])
-        {
-            maxx=arr[i];
-        }
+        cout << arr[i] << " ";
     }
-    cout<<maxx;
+
+    return 0;
 }
