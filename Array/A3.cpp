@@ -1,15 +1,91 @@
-#include <iostream>
+// 1: Maximum Element (Fixed Array)
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int arr[] = {12, 45, 7, 89, 23};
+//     int n = 5;
+
+//     int max = arr[0];
+
+//     for(int i = 1; i < n; i++)
+//     {
+//         if(arr[i] > max)
+//         {
+//             max = arr[i];
+//         }
+//     }
+
+//     cout << "Maximum element = " << max;
+
+//     return 0;
+// }
+
+
+
+
+// 2: Maximum Element (User Input)
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int n;
+//     cout << "Enter number of elements: ";
+//     cin >> n;
+
+//     int arr[n];
+
+//     cout << "Enter " << n << " elements:\n";
+
+//     for(int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+
+//     int maxElement = arr[0];
+
+//     for(int i = 1; i < n; i++)
+//     {
+//         if(arr[i] > maxElement)
+//         {
+//             maxElement = arr[i];
+//         }
+//     }
+
+//     cout << "Maximum element = " << maxElement;
+
+//     return 0;
+// }
+
+
+
+
+
+//3: Maximum Element (Your Version)
+
+
+#include<iostream>
 using namespace std;
 
-int main() 
+int main()
 {
-    int arr[] = {1, 2, 3, 4, 5};
-    int n = 5;
+    int arr[5]={654,6754,223460987,89,7554};
 
-    for(int i = n - 1; i >= 0; i--) 
+    int maxx=arr[0];
+
+    for(int i=0;i<5;i++)
     {
-        cout << arr[i] << " ";
+        if(maxx<arr[i])
+        {
+            maxx=arr[i];
+        }
     }
 
-    return 0;
+    cout<<maxx;
 }
