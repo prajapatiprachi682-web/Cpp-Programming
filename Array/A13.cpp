@@ -1,40 +1,36 @@
+// Array
+// Kadane's Algorithm
+// Maximum Subarray Sum.
+// ✅ #53 — Maximum Subarray
+
+
+
 #include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <climits>
 using namespace std;
 
-int subarraySum(vector<int>& nums, int k)
-{
-    unordered_map<int, int> mp;
+int maxSubarraySum(vector<int>& arr) {
+    int currentSum = 0;
+    int maxSum = INT_MIN;
 
-    mp[0] = 1;
+    for (int i = 0; i < arr.size(); i++) {
+        currentSum += arr[i];
 
-    int sum = 0;
-    int count = 0;
+        if (currentSum > maxSum)
+            maxSum = currentSum;
 
-    for(int i = 0; i < nums.size(); i++)
-    {
-        sum += nums[i];
-
-        if(mp.find(sum - k) != mp.end())
-        {
-            count += mp[sum - k];
-        }
-
-        mp[sum]++;
+        if (currentSum < 0)
+            currentSum = 0;
     }
 
-    return count;
+    return maxSum;
 }
 
-int main()
-{
-    vector<int> nums = {1, 1, 1};
-    int k = 2;
+int main() {
+    vector<int> arr = {2, 3, -23, 4, 5, -34, 34, 244};
 
-    int ans = subarraySum(nums, k);
-
-    cout << "Total Subarrays = " << ans << endl;
+    cout << "Maximum Subarray Sum: " << maxSubarraySum(arr);
 
     return 0;
 }
