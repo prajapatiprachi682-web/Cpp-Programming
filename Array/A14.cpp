@@ -1,57 +1,48 @@
+// Array
+// Prefix Sum
+// Hash Map
+// ✅ #560 — Subarray Sum Equals K
+
+
+
+
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <unordered_map>
 using namespace std;
 
-void nextPermutation(vector<int>& nums)
+int subarraySum(vector<int>& nums, int k)
 {
-    int n = nums.size();
+    unordered_map<int, int> mp;
 
-    int index = -1;
+    mp[0] = 1;
 
-    // Step 1: Find breakpoint
-    for(int i = n - 2; i >= 0; i--)
+    int sum = 0;
+    int count = 0;
+
+    for(int i = 0; i < nums.size(); i++)
     {
-        if(nums[i] < nums[i + 1])
+        sum += nums[i];
+
+        if(mp.find(sum - k) != mp.end())
         {
-            index = i;
-            break;
+            count += mp[sum - k];
         }
+
+        mp[sum]++;
     }
 
-    // If no breakpoint
-    if(index == -1)
-    {
-        reverse(nums.begin(), nums.end());
-        return;
-    }
-
-    // Step 2: Find next greater element
-    for(int i = n - 1; i > index; i--)
-    {
-        if(nums[i] > nums[index])
-        {
-            swap(nums[i], nums[index]);
-            break;
-        }
-    }
-
-    // Step 3: Reverse remaining part
-    reverse(nums.begin() + index + 1, nums.end());
+    return count;
 }
 
 int main()
 {
-    vector<int> nums = {1, 2, 3};
+    vector<int> nums = {1, 1, 1};
+    int k = 2;
 
-    nextPermutation(nums);
+    int ans = subarraySum(nums, k);
 
-    cout << "Next Permutation: ";
-
-    for(int x : nums)
-    {
-        cout << x << " ";
-    }
+    cout << "Total Subarrays = " << ans << endl;
 
     return 0;
 }
