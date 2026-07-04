@@ -1,29 +1,27 @@
+// LeetCode Question Number: 268 ✅ 
+
+
 #include <iostream>
-#include <vector>
-#include <climits>
 using namespace std;
 
-int maxSubarraySum(vector<int>& arr) {
-    int currentSum = 0;
-    int maxSum = INT_MIN;
+int main()
+{
+    int arr[] = {1, 2, 3, 5};
 
-    for (int i = 0; i < arr.size(); i++) {
-        currentSum += arr[i];
+    int n = 5;   // Original numbers should be 1 to 5
 
-        if (currentSum > maxSum)
-            maxSum = currentSum;
+    int totalSum = n * (n + 1) / 2;
 
-        if (currentSum < 0)
-            currentSum = 0;
+    int arraySum = 0;
+
+    for(int i = 0; i < n - 1; i++)
+    {
+        arraySum += arr[i];
     }
 
-    return maxSum;
-}
+    int missingNumber = totalSum - arraySum;
 
-int main() {
-    vector<int> arr = {2, 3, -23, 4, 5, -34, 34, 244};
-
-    cout << "Maximum Subarray Sum: " << maxSubarraySum(arr);
+    cout << "Missing Number = " << missingNumber;
 
     return 0;
 }
