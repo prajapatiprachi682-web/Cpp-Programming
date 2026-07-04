@@ -1,53 +1,91 @@
-#include <iostream>
-#include <vector>
+// Sort 0s and 1s (Correct Code ✅)
+
+
+// #include<iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int arr[] = {0,1,0,1,0,1,0,1};
+
+//     int n = sizeof(arr) / sizeof(arr[0]);
+
+//     int left = 0;
+//     int right = n - 1;
+
+//     while(left <= right)
+//     {
+//         while(arr[left] == 0 && left < right)
+//         {
+//             left++;
+//         }
+
+//         while(arr[right] == 1 && left < right)
+//         {
+//             right--;
+//         }
+
+//         if(left <= right)
+//         {
+//             swap(arr[left], arr[right]);
+//             left++;
+//             right--;
+//         }
+//     }
+
+//     cout << "Sorted Array: ";
+
+//     for(int i = 0; i < n; i++)
+//     {
+//         cout << arr[i] << " ";
+//     }
+
+//     return 0;
+// }
+
+
+
+
+#include<iostream>
 using namespace std;
 
-void merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
+void sort012(int arr[], int n)
 {
-    int i = m - 1;
-    int j = n - 1;
-    int k = m + n - 1;
+    int low = 0;
+    int mid = 0;
+    int high = n - 1;
 
-    while(i >= 0 && j >= 0)
+    while(mid <= high)
     {
-        if(nums1[i] > nums2[j])
+        if(arr[mid] == 0)
         {
-            nums1[k] = nums1[i];
-            i--;
+            swap(arr[low], arr[mid]);
+            low++;
+            mid++;
+        }
+        else if(arr[mid] == 1)
+        {
+            mid++;
         }
         else
         {
-            nums1[k] = nums2[j];
-            j--;
+            swap(arr[mid], arr[high]);
+            high--;
         }
-
-        k--;
-    }
-
-    // Remaining elements of nums2
-    while(j >= 0)
-    {
-        nums1[k] = nums2[j];
-        j--;
-        k--;
     }
 }
 
 int main()
 {
-    vector<int> nums1 = {1,2,3,0,0,0};
-    vector<int> nums2 = {2,5,6};
+    int arr[] = {0,1,2,0,1,2,0,1,2};
 
-    int m = 3;
-    int n = 3;
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    merge(nums1, m, nums2, n);
+    sort012(arr, n);
 
-    cout << "Merged Array: ";
-
-    for(int x : nums1)
+    for(int i = 0; i < n; i++)
     {
-        cout << x << " ";
+        cout << arr[i] << " ";
     }
 
     return 0;
