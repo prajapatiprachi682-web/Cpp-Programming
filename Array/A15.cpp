@@ -1,16 +1,65 @@
-//1️⃣ strlen() → Length of String
+// Array
+// Next Permutation
+// 📌 LeetCode
+// ✅ #31 — Next Permutation
+
+
 
 
 #include <iostream>
-#include <cstring>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int main() 
+void nextPermutation(vector<int>& nums)
 {
+    int n = nums.size();
 
-    char name[] = "Prachi";
+    int index = -1;
 
-    cout << "Length = " << strlen(name);
+    // Step 1: Find breakpoint
+    for(int i = n - 2; i >= 0; i--)
+    {
+        if(nums[i] < nums[i + 1])
+        {
+            index = i;
+            break;
+        }
+    }
+
+    // If no breakpoint
+    if(index == -1)
+    {
+        reverse(nums.begin(), nums.end());
+        return;
+    }
+
+    // Step 2: Find next greater element
+    for(int i = n - 1; i > index; i--)
+    {
+        if(nums[i] > nums[index])
+        {
+            swap(nums[i], nums[index]);
+            break;
+        }
+    }
+
+    // Step 3: Reverse remaining part
+    reverse(nums.begin() + index + 1, nums.end());
+}
+
+int main()
+{
+    vector<int> nums = {1, 2, 3};
+
+    nextPermutation(nums);
+
+    cout << "Next Permutation: ";
+
+    for(int x : nums)
+    {
+        cout << x << " ";
+    }
 
     return 0;
 }
