@@ -1,48 +1,62 @@
-// Remove duplicates from sorted array
+// 📌 Topic
+// Array
+// Merge Two Sorted Arrays
+// Median of Two Sorted Arrays
+// 📌 LeetCode
+// ✅ #4 — Median of Two Sorted Arrays
+
+
+
+
+// Median of two sorted Array
 
 
 
 #include <iostream>
 using namespace std;
 
-int removeDuplicates(int arr[], int n)
-{
-    int temp[100];
-    int k = 0;
+class Solution {
+public:
+    double medianOf2(int a[], int m, int b[], int n) {
+        int temp[100];
+        int i = 0, j = 0, k = 0;
 
-    temp[k++] = arr[0];
+        while (i < m && j < n) {
+            if (a[i] <= b[j]) {
+                temp[k++] = a[i++];
+            } else {
+                temp[k++] = b[j++];
+            }
+        }
 
-    for(int i = 1; i < n; i++)
-    {
-        if(arr[i] != arr[i - 1])
-        {
-            temp[k++] = arr[i];
+        while (i < m) {
+            temp[k++] = a[i++];
+        }
+
+        while (j < n) {
+            temp[k++] = b[j++];
+        }
+
+        int size = k;
+
+        if (size % 2 != 0) {
+            return temp[size / 2];
+        } else {
+            return (temp[size / 2] + temp[(size / 2) - 1]) / 2.0;
         }
     }
+};
 
-    for(int i = 0; i < k; i++)
-    {
-        arr[i] = temp[i];
-    }
+int main() {
+    int a[] = {1, 3, 5};
+    int b[] = {2, 4, 6, 8};
 
-    return k;
-}
+    int m = sizeof(a) / sizeof(a[0]);
+    int n = sizeof(b) / sizeof(b[0]);
 
-int main()
-{
-    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    Solution obj;
 
-    int k = removeDuplicates(arr, n);
-
-    cout << "Number of unique elements = " << k << endl;
-
-    cout << "Array after removing duplicates: ";
-
-    for(int i = 0; i < k; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    cout << "Median = " << obj.medianOf2(a, m, b, n);
 
     return 0;
 }
