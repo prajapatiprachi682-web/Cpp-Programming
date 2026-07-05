@@ -1,71 +1,53 @@
-// Earliest Finish Time for Land and Water Rides I
+// 📌 Topic
+// Array
+// Remove Duplicates from Sorted Array
+// 📌 LeetCode
+// ✅ #26 — Remove Duplicates from Sorted Array
+
 
 
 
 #include <iostream>
-#include <vector>
-#include <climits>
-#include <algorithm>
 using namespace std;
 
-class Solution
+int removeDuplicates(int arr[], int n)
 {
-public:
-    int earliestFinishTime(vector<int>& landStartTime,
-                           vector<int>& landDuration,
-                           vector<int>& waterStartTime,
-                           vector<int>& waterDuration)
+    int temp[100];
+    int k = 0;
+
+    temp[k++] = arr[0];
+
+    for(int i = 1; i < n; i++)
     {
-        int ans = INT_MAX;
-
-        int n = landStartTime.size();
-        int m = waterStartTime.size();
-
-        for(int i = 0; i < n; i++)
+        if(arr[i] != arr[i - 1])
         {
-            for(int j = 0; j < m; j++)
-            {
-                // Land -> Water
-                int landFinish = landStartTime[i] + landDuration[i];
-
-                int waterStart = max(landFinish, waterStartTime[j]);
-
-                int finish1 = waterStart + waterDuration[j];
-
-                ans = min(ans, finish1);
-
-                // Water -> Land
-                int waterFinish = waterStartTime[j] + waterDuration[j];
-
-                int landStart = max(waterFinish, landStartTime[i]);
-
-                int finish2 = landStart + landDuration[i];
-
-                ans = min(ans, finish2);
-            }
+            temp[k++] = arr[i];
         }
-
-        return ans;
     }
-};
+
+    for(int i = 0; i < k; i++)
+    {
+        arr[i] = temp[i];
+    }
+
+    return k;
+}
 
 int main()
 {
-    vector<int> landStartTime = {2, 8};
-    vector<int> landDuration = {4, 1};
+    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    vector<int> waterStartTime = {6};
-    vector<int> waterDuration = {3};
+    int k = removeDuplicates(arr, n);
 
-    Solution obj;
+    cout << "Number of unique elements = " << k << endl;
 
-    cout << "Earliest Finish Time = "
-         << obj.earliestFinishTime(
-                landStartTime,
-                landDuration,
-                waterStartTime,
-                waterDuration)
-         << endl;
+    cout << "Array after removing duplicates: ";
+
+    for(int i = 0; i < k; i++)
+    {
+        cout << arr[i] << " ";
+    }
 
     return 0;
 }
