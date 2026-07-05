@@ -1,67 +1,76 @@
-// Book Allocation
+// 📌 Topic
+// Array
+// Simulation
+// Earliest Finish Time for Land and Water Rides I
+// 📌 LeetCode
+// ✅ #3652 — Earliest Finish Time for Land and Water Rides I
+
 
 
 
 #include <iostream>
 #include <vector>
+#include <climits>
 #include <algorithm>
 using namespace std;
 
-int countStudents(vector<int>& arr, int pages)
+class Solution
 {
-    int students = 1;
-    int pageSum = 0;
-
-    for(int i = 0; i < arr.size(); i++)
+public:
+    int earliestFinishTime(vector<int>& landStartTime,
+                           vector<int>& landDuration,
+                           vector<int>& waterStartTime,
+                           vector<int>& waterDuration)
     {
-        if(pageSum + arr[i] <= pages)
+        int ans = INT_MAX;
+
+        int n = landStartTime.size();
+        int m = waterStartTime.size();
+
+        for(int i = 0; i < n; i++)
         {
-            pageSum += arr[i];
+            for(int j = 0; j < m; j++)
+            {
+                // Land -> Water
+                int landFinish = landStartTime[i] + landDuration[i];
+
+                int waterStart = max(landFinish, waterStartTime[j]);
+
+                int finish1 = waterStart + waterDuration[j];
+
+                ans = min(ans, finish1);
+
+                // Water -> Land
+                int waterFinish = waterStartTime[j] + waterDuration[j];
+
+                int landStart = max(waterFinish, landStartTime[i]);
+
+                int finish2 = landStart + landDuration[i];
+
+                ans = min(ans, finish2);
+            }
         }
-        else
-        {
-            students++;
-            pageSum = arr[i];
-        }
+
+        return ans;
     }
-
-    return students;
-}
-
-int findPages(vector<int>& arr, int n, int m)
-{
-    if(m > n)
-        return -1;
-
-    int low = *max_element(arr.begin(), arr.end());
-
-    int high = 0;
-
-    for(int x : arr)
-    {
-        high += x;
-    }
-
-    for(int pages = low; pages <= high; pages++)
-    {
-        if(countStudents(arr, pages) <= m)
-        {
-            return pages;
-        }
-    }
-
-    return -1;
-}
+};
 
 int main()
 {
-    vector<int> arr = {25, 46, 28, 49, 24};
-    
-    int n = arr.size();
-    int m = 4;
+    vector<int> landStartTime = {2, 8};
+    vector<int> landDuration = {4, 1};
 
-    cout << "Minimum Pages = "
-         << findPages(arr, n, m)
+    vector<int> waterStartTime = {6};
+    vector<int> waterDuration = {3};
+
+    Solution obj;
+
+    cout << "Earliest Finish Time = "
+         << obj.earliestFinishTime(
+                landStartTime,
+                landDuration,
+                waterStartTime,
+                waterDuration)
          << endl;
 
     return 0;
