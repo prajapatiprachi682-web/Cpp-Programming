@@ -1,52 +1,122 @@
-// Median of two sorted Array
+// 📌 Topic
+// Array
+// Two Sum
+// 📌 LeetCode
+// ✅ #1 — Two Sum
+
+
+
+
+// Brute force approach
+// Time Complexity=o(n^2)
+// Space Complexity=o(1)
+
+
+
+// #include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// class Solution {
+// public:
+//     vector<int> twoSum(vector<int>& nums, int target) {
+
+//         for(int i = 0; i < nums.size(); i++)
+//         {
+//             for(int j = i + 1; j < nums.size(); j++)
+//             {
+//                 if(nums[i] + nums[j] == target)
+//                 {
+//                     return {i, j};
+//                 }
+//             }
+//         }
+
+//         return {};
+//     }
+// };
+
+// int main() {
+
+//     Solution obj;
+
+//     vector<int> nums = {2, 7, 11, 15};
+//     int target = 9;
+
+//     vector<int> ans = obj.twoSum(nums, target);
+
+//     cout << "Indices are: ";
+
+//     for(int i = 0; i < ans.size(); i++)
+//     {
+//         cout << ans[i] << " ";
+//     }
+
+//     return 0;
+// }
+
+
+
+
+//  Two Pointer Approach
+// Time Complexity=o(n^2)
+// Space Complexity=o(1)
 
 
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
 class Solution {
 public:
-    double medianOf2(int a[], int m, int b[], int n) {
-        int temp[100];
-        int i = 0, j = 0, k = 0;
+    vector<int> twoSum(vector<int>& nums, int target) {
 
-        while (i < m && j < n) {
-            if (a[i] <= b[j]) {
-                temp[k++] = a[i++];
-            } else {
-                temp[k++] = b[j++];
+        sort(nums.begin(), nums.end());
+
+        int left = 0;
+        int right = nums.size() - 1;
+
+        while(left < right)
+        {
+            int sum = nums[left] + nums[right];
+
+            if(sum == target)
+            {
+                return {nums[left], nums[right]};
+            }
+            else if(sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                right--;
             }
         }
 
-        while (i < m) {
-            temp[k++] = a[i++];
-        }
-
-        while (j < n) {
-            temp[k++] = b[j++];
-        }
-
-        int size = k;
-
-        if (size % 2 != 0) {
-            return temp[size / 2];
-        } else {
-            return (temp[size / 2] + temp[(size / 2) - 1]) / 2.0;
-        }
+        return {};
     }
 };
 
 int main() {
-    int a[] = {1, 3, 5};
-    int b[] = {2, 4, 6, 8};
-
-    int m = sizeof(a) / sizeof(a[0]);
-    int n = sizeof(b) / sizeof(b[0]);
 
     Solution obj;
 
-    cout << "Median = " << obj.medianOf2(a, m, b, n);
+    vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+
+    vector<int> ans = obj.twoSum(nums, target);
+
+    cout << "Pair is: ";
+
+    for(int i = 0; i < ans.size(); i++)
+    {
+        cout << ans[i] << " ";
+    }
 
     return 0;
 }
