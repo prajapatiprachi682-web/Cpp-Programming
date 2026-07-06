@@ -1,4 +1,8 @@
-// Cintains duplicate
+//Array
+//Contains Duplicate Within K Distance
+// ✅ #219 — Contains Duplicate II
+
+
 
 
 
