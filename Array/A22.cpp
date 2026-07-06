@@ -1,126 +1,74 @@
-// Earliest Finish Time for Land and Water Rides II
+// 📌 Topic
+// Binary Search on Answer
+// Book Allocation
+//📌 GFG
+// ✅ Book Allocation Problem
+//📌 Code360
+//✅ Allocate Books
+
 
 
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <climits>
 using namespace std;
 
-class Solution
+int countStudents(vector<int>& arr, int pages)
 {
-public:
+    int students = 1;
+    int pageSum = 0;
 
-    long long solve(vector<int>& Astart,
-                    vector<int>& Adur,
-                    vector<int>& Bstart,
-                    vector<int>& Bdur)
+    for(int i = 0; i < arr.size(); i++)
     {
-        int m = Bstart.size();
-
-        vector<pair<long long,long long>> rides;
-
-        for(int i = 0; i < m; i++)
+        if(pageSum + arr[i] <= pages)
         {
-            rides.push_back({Bstart[i], Bdur[i]});
+            pageSum += arr[i];
         }
-
-        sort(rides.begin(), rides.end());
-
-        vector<long long> pref(m);
-        vector<long long> suff(m);
-
-        pref[0] = rides[0].second;
-
-        for(int i = 1; i < m; i++)
+        else
         {
-            pref[i] = min(pref[i - 1], rides[i].second);
+            students++;
+            pageSum = arr[i];
         }
-
-        suff[m - 1] =
-            rides[m - 1].first + rides[m - 1].second;
-
-        for(int i = m - 2; i >= 0; i--)
-        {
-            suff[i] = min(suff[i + 1],
-                          rides[i].first +
-                          rides[i].second);
-        }
-
-        vector<long long> starts;
-
-        for(auto &x : rides)
-        {
-            starts.push_back(x.first);
-        }
-
-        long long ans = LLONG_MAX;
-
-        for(int i = 0; i < Astart.size(); i++)
-        {
-            long long finishA =
-                (long long)Astart[i] + Adur[i];
-
-            int idx =
-                upper_bound(starts.begin(),
-                            starts.end(),
-                            finishA)
-                - starts.begin();
-
-            if(idx > 0)
-            {
-                ans = min(ans,
-                          finishA + pref[idx - 1]);
-            }
-
-            if(idx < m)
-            {
-                ans = min(ans,
-                          suff[idx]);
-            }
-        }
-
-        return ans;
     }
 
-    int earliestFinishTime(vector<int>& landStartTime,
-                           vector<int>& landDuration,
-                           vector<int>& waterStartTime,
-                           vector<int>& waterDuration)
+    return students;
+}
+
+int findPages(vector<int>& arr, int n, int m)
+{
+    if(m > n)
+        return -1;
+
+    int low = *max_element(arr.begin(), arr.end());
+
+    int high = 0;
+
+    for(int x : arr)
     {
-        long long ans1 =
-            solve(landStartTime,
-                  landDuration,
-                  waterStartTime,
-                  waterDuration);
-
-        long long ans2 =
-            solve(waterStartTime,
-                  waterDuration,
-                  landStartTime,
-                  landDuration);
-
-        return (int)min(ans1, ans2);
+        high += x;
     }
-};
+
+    for(int pages = low; pages <= high; pages++)
+    {
+        if(countStudents(arr, pages) <= m)
+        {
+            return pages;
+        }
+    }
+
+    return -1;
+}
 
 int main()
 {
-    vector<int> landStartTime = {2, 8};
-    vector<int> landDuration  = {4, 1};
+    vector<int> arr = {25, 46, 28, 49, 24};
+    
+    int n = arr.size();
+    int m = 4;
 
-    vector<int> waterStartTime = {6};
-    vector<int> waterDuration  = {3};
-
-    Solution obj;
-
-    cout << "Earliest Finish Time = "
-         << obj.earliestFinishTime(
-                landStartTime,
-                landDuration,
-                waterStartTime,
-                waterDuration)
+    cout << "Minimum Pages = "
+         << findPages(arr, n, m)
          << endl;
 
     return 0;
