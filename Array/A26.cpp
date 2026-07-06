@@ -1,4 +1,9 @@
-// Find smallest letter greater than target
+// Topic
+// Array
+// Partition Array According to Pivot
+// ✅ #2161 — Partition Array According to Given Pivot
+
+
 
 
 
@@ -9,27 +14,38 @@ using namespace std;
 class Solution
 {
 public:
-    char nextGreatestLetter(vector<char>& letters, char target)
+    vector<int> pivotArray(vector<int>& nums, int pivot)
     {
-        int low = 0;
-        int high = letters.size() - 1;
+        vector<int> less;
+        vector<int> same;
+        vector<int> greater;
 
-        char ans = letters[0];
-
-        while(low <= high)
+        for(int num : nums)
         {
-            int mid = low + (high - low) / 2;
-
-            if(letters[mid] > target)
+            if(num < pivot)
             {
-                ans = letters[mid];
-                high = mid - 1;
+                less.push_back(num);
+            }
+            else if(num == pivot)
+            {
+                same.push_back(num);
             }
             else
             {
-                low = mid + 1;
+                greater.push_back(num);
             }
         }
+
+        vector<int> ans;
+
+        for(int x : less)
+            ans.push_back(x);
+
+        for(int x : same)
+            ans.push_back(x);
+
+        for(int x : greater)
+            ans.push_back(x);
 
         return ans;
     }
@@ -37,14 +53,21 @@ public:
 
 int main()
 {
-    vector<char> letters = {'c', 'f', 'j'};
-    char target = 'a';
+    vector<int> nums = {9, 12, 5, 10, 14, 3, 10};
+    int pivot = 10;
 
     Solution obj;
 
-    cout << "Next Greatest Letter = "
-         << obj.nextGreatestLetter(letters, target)
-         << endl;
+    vector<int> ans = obj.pivotArray(nums, pivot);
+
+    cout << "Pivoted Array: ";
+
+    for(int x : ans)
+    {
+        cout << x << " ";
+    }
+
+    cout << endl;
 
     return 0;
 }
