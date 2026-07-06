@@ -1,57 +1,51 @@
-// Substring with Max Zero-One Diff
+// 📌 Topic
+// Array
+// Check if Array Is Sorted and Rotated
+// 📌 LeetCode
+// ✅ #1752 — Check if Array Is Sorted and Rotated
+
+
 
 
 
 #include <iostream>
-#include <string>
-#include <climits>
+#include <vector>
 using namespace std;
 
 class Solution
 {
 public:
-    int maxSubstring(string &s)
+    bool check(vector<int>& nums)
     {
-        int curr = 0;
-        int maxx = INT_MIN;
+        int n = nums.size();
+        int count = 0;
 
-        for(char ch : s)
+        for(int i = 0; i < n; i++)
         {
-            int val;
-
-            if(ch == '0')
+            if(nums[i] > nums[(i + 1) % n])
             {
-                val = 1;
-            }
-            else
-            {
-                val = -1;
-            }
-
-            curr += val;
-
-            maxx = max(maxx, curr);
-
-            if(curr < 0)
-            {
-                curr = 0;
+                count++;
             }
         }
 
-        return (maxx <= 0) ? -1 : maxx;
+        return count <= 1;
     }
 };
 
 int main()
 {
-    string s = "11000010001";
+    vector<int> nums = {3, 4, 5, 1, 2};
 
     Solution obj;
 
-    cout << "String = " << s << endl;
-    cout << "Maximum Difference = "
-         << obj.maxSubstring(s)
-         << endl;
+    if(obj.check(nums))
+    {
+        cout << "True" << endl;
+    }
+    else
+    {
+        cout << "False" << endl;
+    }
 
     return 0;
 }
