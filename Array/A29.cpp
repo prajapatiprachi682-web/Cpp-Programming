@@ -1,40 +1,95 @@
-// best to buy and sell stock
+// Array
+// Monotonic Stack
+// Prefix Sum
+// Maximum Subarray Min-Product
+// ✅ #1856 — Maximum Subarray Min-Product
+
+
 
 
 
 #include <iostream>
 #include <vector>
+#include <stack>
+#include <algorithm>
 using namespace std;
 
 class Solution
 {
 public:
-    int maxProfit(vector<int>& prices)
+    int maxSumMinProduct(vector<int>& nums)
     {
-        int minPrice = prices[0];
-        int maxProfit = 0;
+        int n = nums.size();
 
-        for(int i = 1; i < prices.size(); i++)
+        vector<long long> prefix(n + 1, 0);
+
+        for(int i = 0; i < n; i++)
         {
-            minPrice = min(minPrice, prices[i]);
-
-            int profit = prices[i] - minPrice;
-
-            maxProfit = max(maxProfit, profit);
+            prefix[i + 1] = prefix[i] + nums[i];
         }
 
-        return maxProfit;
+        vector<int> left(n);
+        vector<int> right(n);
+
+        stack<int> st;
+
+        // Previous Smaller Element
+        for(int i = 0; i < n; i++)
+        {
+            while(!st.empty() &&
+                  nums[st.top()] >= nums[i])
+            {
+                st.pop();
+            }
+
+            left[i] = st.empty() ? -1 : st.top();
+
+            st.push(i);
+        }
+
+        while(!st.empty())
+        {
+            st.pop();
+        }
+
+        // Next Smaller Element
+        for(int i = n - 1; i >= 0; i--)
+        {
+            while(!st.empty() &&
+                  nums[st.top()] > nums[i])
+            {
+                st.pop();
+            }
+
+            right[i] = st.empty() ? n : st.top();
+
+            st.push(i);
+        }
+
+        long long ans = 0;
+
+        for(int i = 0; i < n; i++)
+        {
+            long long rangeSum =
+                prefix[right[i]]
+                - prefix[left[i] + 1];
+
+            ans = max(ans,
+                      rangeSum * nums[i]);
+        }
+
+        return ans % 1000000007;
     }
 };
 
 int main()
 {
-    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    vector<int> nums = {1, 2, 3, 2};
 
     Solution obj;
 
-    cout << "Maximum Profit = "
-         << obj.maxProfit(prices)
+    cout << "Maximum Sum Min Product = "
+         << obj.maxSumMinProduct(nums)
          << endl;
 
     return 0;
