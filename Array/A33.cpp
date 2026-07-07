@@ -1,5 +1,6 @@
-//  Longest Subarray of sum k
-
+// Array
+// Longest Subarray with Sum K
+// gfg/code 360
 
 
 #include <iostream>
