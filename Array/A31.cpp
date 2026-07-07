@@ -1,90 +1,50 @@
-// Maximum subarray min Product
+// ✅ Arrays
+// ✅ Cyclic Sort
+// ✅ In-Place Hashing
+// ✅ Index Placement
+// ✅ Coding Ninjas / LeetCode 41 - First Missing Positive
 
 
 
-#include <iostream>
-#include <vector>
-#include <stack>
-#include <algorithm>
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution
+int firstMissing(int arr[], int n)
 {
-public:
-    int maxSumMinProduct(vector<int>& nums)
+    int i = 0;
+
+    while(i < n)
     {
-        int n = nums.size();
-
-        vector<long long> prefix(n + 1, 0);
-
-        for(int i = 0; i < n; i++)
+        if(arr[i] > 0 &&
+           arr[i] <= n &&
+           arr[i] != arr[arr[i] - 1])
         {
-            prefix[i + 1] = prefix[i] + nums[i];
+            swap(arr[i], arr[arr[i] - 1]);
         }
-
-        vector<int> left(n);
-        vector<int> right(n);
-
-        stack<int> st;
-
-        // Previous Smaller Element
-        for(int i = 0; i < n; i++)
+        else
         {
-            while(!st.empty() &&
-                  nums[st.top()] >= nums[i])
-            {
-                st.pop();
-            }
-
-            left[i] = st.empty() ? -1 : st.top();
-
-            st.push(i);
+            i++;
         }
-
-        while(!st.empty())
-        {
-            st.pop();
-        }
-
-        // Next Smaller Element
-        for(int i = n - 1; i >= 0; i--)
-        {
-            while(!st.empty() &&
-                  nums[st.top()] > nums[i])
-            {
-                st.pop();
-            }
-
-            right[i] = st.empty() ? n : st.top();
-
-            st.push(i);
-        }
-
-        long long ans = 0;
-
-        for(int i = 0; i < n; i++)
-        {
-            long long rangeSum =
-                prefix[right[i]]
-                - prefix[left[i] + 1];
-
-            ans = max(ans,
-                      rangeSum * nums[i]);
-        }
-
-        return ans % 1000000007;
     }
-};
+
+    for(i = 0; i < n; i++)
+    {
+        if(arr[i] != i + 1)
+            return i + 1;
+    }
+
+    return n + 1;
+}
 
 int main()
 {
-    vector<int> nums = {1, 2, 3, 2};
+    int arr[] = {3,4,-1,1};
 
-    Solution obj;
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    cout << "Maximum Sum Min Product = "
-         << obj.maxSumMinProduct(nums)
-         << endl;
+    cout << firstMissing(arr, n);
 
     return 0;
 }
