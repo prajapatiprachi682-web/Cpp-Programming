@@ -1,60 +1,56 @@
-// third largest
+// Array
+// Replace Every Element with the Greatest Element on Right Side
+// LC/GFG
+
 
 
 
 #include <iostream>
 #include <vector>
-#include <climits>
+#include <algorithm>
 using namespace std;
 
 class Solution
 {
 public:
-    int thirdLargest(vector<int> &arr)
+    vector<int> nextGreatest(vector<int> arr)
     {
         int n = arr.size();
 
-        if(n < 3)
-            return -1;
+        vector<int> ans(n);
 
-        int first = INT_MIN;
-        int second = INT_MIN;
-        int third = INT_MIN;
-
-        for(int x : arr)
+        for(int i = 0; i < n; i++)
         {
-            first = max(first, x);
-        }
+            int mx = -1;
 
-        for(int x : arr)
-        {
-            if(x < first)
+            for(int j = i + 1; j < n; j++)
             {
-                second = max(second, x);
+                mx = max(mx, arr[j]);
             }
+
+            ans[i] = mx;
         }
 
-        for(int x : arr)
-        {
-            if(x < second)
-            {
-                third = max(third, x);
-            }
-        }
-
-        return (third == INT_MIN) ? -1 : third;
+        return ans;
     }
 };
 
 int main()
 {
-    vector<int> arr = {5, 5, 4, 3, 2};
+    vector<int> arr = {16, 17, 4, 3, 5, 2};
 
     Solution obj;
 
-    cout << "Third Largest Element = "
-         << obj.thirdLargest(arr)
-         << endl;
+    vector<int> ans = obj.nextGreatest(arr);
+
+    cout << "Result Array: ";
+
+    for(int x : ans)
+    {
+        cout << x << " ";
+    }
+
+    cout << endl;
 
     return 0;
 }
