@@ -1,5 +1,5 @@
-//  Type of Array
-
+// Array
+// Check Type of Array (Increasing/Decreasing/Rotated)
 
 
 #include <iostream>
