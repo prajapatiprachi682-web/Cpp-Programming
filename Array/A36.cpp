@@ -1,39 +1,63 @@
-// Min and Max in Array
+// Array
+// Third Largest Element
+// GFG/Code360
+
 
 
 
 #include <iostream>
 #include <vector>
+#include <climits>
 using namespace std;
 
 class Solution
 {
 public:
-    vector<int> getMinMax(vector<int> &arr)
+    int thirdLargest(vector<int> &arr)
     {
-        int mini = arr[0];
-        int maxi = arr[0];
+        int n = arr.size();
 
-        for(int i = 1; i < arr.size(); i++)
+        if(n < 3)
+            return -1;
+
+        int first = INT_MIN;
+        int second = INT_MIN;
+        int third = INT_MIN;
+
+        for(int x : arr)
         {
-            mini = min(mini, arr[i]);
-            maxi = max(maxi, arr[i]);
+            first = max(first, x);
         }
 
-        return {mini, maxi};
+        for(int x : arr)
+        {
+            if(x < first)
+            {
+                second = max(second, x);
+            }
+        }
+
+        for(int x : arr)
+        {
+            if(x < second)
+            {
+                third = max(third, x);
+            }
+        }
+
+        return (third == INT_MIN) ? -1 : third;
     }
 };
 
 int main()
 {
-    vector<int> arr = {1, 4, 3, 5, 8, 6};
+    vector<int> arr = {5, 5, 4, 3, 2};
 
     Solution obj;
 
-    vector<int> ans = obj.getMinMax(arr);
-
-    cout << "Minimum = " << ans[0] << endl;
-    cout << "Maximum = " << ans[1] << endl;
+    cout << "Third Largest Element = "
+         << obj.thirdLargest(arr)
+         << endl;
 
     return 0;
 }
