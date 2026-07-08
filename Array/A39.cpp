@@ -1,4 +1,6 @@
+// Array
 //  First and Second Smallests
+// GFG/Code360
 
 
 
