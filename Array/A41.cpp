@@ -1,31 +1,32 @@
-// Greatest on Right Side
-
+// Array
+// Most Frequent in a Limited Range Array
+// GFG
 
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 class Solution
 {
 public:
-    vector<int> nextGreatest(vector<int> arr)
+    int maxRepeating(int k, vector<int>& arr)
     {
-        int n = arr.size();
+        vector<int> freq(k, 0);
 
-        vector<int> ans(n);
-
-        for(int i = 0; i < n; i++)
+        for(int x : arr)
         {
-            int mx = -1;
+            freq[x]++;
+        }
 
-            for(int j = i + 1; j < n; j++)
+        int ans = 0;
+
+        for(int i = 1; i < k; i++)
+        {
+            if(freq[i] > freq[ans])
             {
-                mx = max(mx, arr[j]);
+                ans = i;
             }
-
-            ans[i] = mx;
         }
 
         return ans;
@@ -34,20 +35,14 @@ public:
 
 int main()
 {
-    vector<int> arr = {16, 17, 4, 3, 5, 2};
+    vector<int> arr = {2, 3, 3, 5, 3, 4, 1, 7};
+    int k = 8;
 
     Solution obj;
 
-    vector<int> ans = obj.nextGreatest(arr);
-
-    cout << "Result Array: ";
-
-    for(int x : ans)
-    {
-        cout << x << " ";
-    }
-
-    cout << endl;
+    cout << "Maximum Repeating Element = "
+         << obj.maxRepeating(k, arr)
+         << endl;
 
     return 0;
 }
