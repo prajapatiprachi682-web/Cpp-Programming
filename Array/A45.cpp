@@ -1,56 +1,54 @@
-//  GFG - Find Element Appearing Greater Than Left and Smaller Than Right
+// Array
+// Plus One (Adding One to Array)
+// ✅ #66 — Plus One
+// GFG / Code 360
 
 
 
 #include <iostream>
 #include <vector>
-#include <climits>
 using namespace std;
 
 class Solution
 {
 public:
-    int findElement(vector<int> &arr)
+    vector<int> addOne(vector<int>& arr)
     {
         int n = arr.size();
 
-        vector<int> leftMax(n);
-
-        leftMax[0] = arr[0];
-
-        for(int i = 1; i < n; i++)
-        {
-            leftMax[i] = max(leftMax[i - 1], arr[i]);
-        }
-
-        int rightMin = INT_MAX;
-
         for(int i = n - 1; i >= 0; i--)
         {
-            if(i > 0 &&
-               i < n - 1 &&
-               leftMax[i - 1] <= arr[i] &&
-               rightMin >= arr[i])
+            if(arr[i] < 9)
             {
-                return arr[i];
+                arr[i]++;
+                return arr;
             }
 
-            rightMin = min(rightMin, arr[i]);
+            arr[i] = 0;
         }
 
-        return -1;
+        arr.insert(arr.begin(), 1);
+
+        return arr;
     }
 };
 
 int main()
 {
-    vector<int> arr = {4, 2, 5, 7};
+    vector<int> arr = {9, 9, 9};
 
     Solution obj;
 
-    cout << "Element = "
-         << obj.findElement(arr)
-         << endl;
+    vector<int> ans = obj.addOne(arr);
+
+    cout << "After Adding One: ";
+
+    for(int x : ans)
+    {
+        cout << x << " ";
+    }
+
+    cout << endl;
 
     return 0;
 }
