@@ -1,4 +1,7 @@
-// Move all negative elements to end
+// Array
+// Rearrange Array Alternating Positive and Negative Numbers
+// GFG/code360
+
 
 
 
@@ -9,55 +12,50 @@ using namespace std;
 class Solution
 {
 public:
-    void segregateElements(vector<int>& arr)
+    void rearrange(vector<int>& arr)
     {
-        vector<int> temp;
+        vector<int> pos, neg;
 
-        // Positive and Zero elements
         for(int x : arr)
         {
             if(x >= 0)
-            {
-                temp.push_back(x);
-            }
+                pos.push_back(x);
+            else
+                neg.push_back(x);
         }
 
-        // Negative elements
-        for(int x : arr)
+        int i = 0, j = 0, k = 0;
+
+        while(i < pos.size() && j < neg.size())
         {
-            if(x < 0)
-            {
-                temp.push_back(x);
-            }
+            arr[k++] = pos[i++];
+            arr[k++] = neg[j++];
         }
 
-        for(int i = 0; i < arr.size(); i++)
+        while(i < pos.size())
         {
-            arr[i] = temp[i];
+            arr[k++] = pos[i++];
+        }
+
+        while(j < neg.size())
+        {
+            arr[k++] = neg[j++];
         }
     }
 };
 
 int main()
 {
-    vector<int> arr = {1, -2, 3, -4, 5, -6};
+    vector<int> arr = {9, 4, -2, -1, 5, 0, -5, -3, 2};
 
     Solution obj;
+    obj.rearrange(arr);
 
-    cout << "Original Array: ";
     for(int x : arr)
     {
         cout << x << " ";
     }
-    cout << endl;
 
-    obj.segregateElements(arr);
-
-    cout << "After Segregation: ";
-    for(int x : arr)
-    {
-        cout << x << " ";
-    }
     cout << endl;
 
     return 0;
