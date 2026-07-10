@@ -1,55 +1,57 @@
+// Array
+//  GFG - Find Element Appearing Greater Than Left and Smaller Than Right
+
+
+
 #include <iostream>
 #include <vector>
+#include <climits>
 using namespace std;
 
 class Solution
 {
 public:
-    void rearrange(vector<int>& arr)
+    int findElement(vector<int> &arr)
     {
-        vector<int> pos, neg;
+        int n = arr.size();
 
-        for(int x : arr)
+        vector<int> leftMax(n);
+
+        leftMax[0] = arr[0];
+
+        for(int i = 1; i < n; i++)
         {
-            if(x >= 0)
-                pos.push_back(x);
-            else
-                neg.push_back(x);
+            leftMax[i] = max(leftMax[i - 1], arr[i]);
         }
 
-        int i = 0, j = 0, k = 0;
+        int rightMin = INT_MAX;
 
-        while(i < pos.size() && j < neg.size())
+        for(int i = n - 1; i >= 0; i--)
         {
-            arr[k++] = pos[i++];
-            arr[k++] = neg[j++];
+            if(i > 0 &&
+               i < n - 1 &&
+               leftMax[i - 1] <= arr[i] &&
+               rightMin >= arr[i])
+            {
+                return arr[i];
+            }
+
+            rightMin = min(rightMin, arr[i]);
         }
 
-        while(i < pos.size())
-        {
-            arr[k++] = pos[i++];
-        }
-
-        while(j < neg.size())
-        {
-            arr[k++] = neg[j++];
-        }
+        return -1;
     }
 };
 
 int main()
 {
-    vector<int> arr = {9, 4, -2, -1, 5, 0, -5, -3, 2};
+    vector<int> arr = {4, 2, 5, 7};
 
     Solution obj;
-    obj.rearrange(arr);
 
-    for(int x : arr)
-    {
-        cout << x << " ";
-    }
-
-    cout << endl;
+    cout << "Element = "
+         << obj.findElement(arr)
+         << endl;
 
     return 0;
 }
