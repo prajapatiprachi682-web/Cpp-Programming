@@ -1,4 +1,5 @@
-//  Adding One to Array
+// Array
+//  ✅ LeetCode 1470 - Shuffle the Array
 
 
 
@@ -9,36 +10,43 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> addOne(vector<int>& arr)
+    vector<int> shuffle(vector<int>& nums, int n)
     {
-        int n = arr.size();
+        vector<int> x;
+        vector<int> y;
 
-        for(int i = n - 1; i >= 0; i--)
+        for(int i = 0; i < n; i++)
         {
-            if(arr[i] < 9)
-            {
-                arr[i]++;
-                return arr;
-            }
-
-            arr[i] = 0;
+            x.push_back(nums[i]);
         }
 
-        arr.insert(arr.begin(), 1);
+        for(int i = n; i < 2 * n; i++)
+        {
+            y.push_back(nums[i]);
+        }
 
-        return arr;
+        vector<int> ans;
+
+        for(int i = 0; i < n; i++)
+        {
+            ans.push_back(x[i]);
+            ans.push_back(y[i]);
+        }
+
+        return ans;
     }
 };
 
 int main()
 {
-    vector<int> arr = {9, 9, 9};
+    vector<int> nums = {2, 5, 1, 3, 4, 7};
+    int n = 3;
 
     Solution obj;
 
-    vector<int> ans = obj.addOne(arr);
+    vector<int> ans = obj.shuffle(nums, n);
 
-    cout << "After Adding One: ";
+    cout << "Shuffled Array: ";
 
     for(int x : ans)
     {
