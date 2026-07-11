@@ -1,4 +1,9 @@
-//  ✅ LeetCode 1470 - Shuffle the Array
+// Arrray
+// ✅ Kadane's Algorithm
+// ✅ Maximum Subarray Sum
+// ✅ #53 — Maximum Subarray
+// GFG / Code360
+
 
 
 
@@ -6,53 +11,33 @@
 #include <vector>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    vector<int> shuffle(vector<int>& nums, int n)
-    {
-        vector<int> x;
-        vector<int> y;
+    int maxSubarraySum(vector<int> &arr) {
 
-        for(int i = 0; i < n; i++)
-        {
-            x.push_back(nums[i]);
+        int currSum = arr[0];
+        int maxSum = arr[0];
+
+        for(int i = 1; i < arr.size(); i++) {
+
+            currSum = max(arr[i], currSum + arr[i]);
+
+            maxSum = max(maxSum, currSum);
         }
 
-        for(int i = n; i < 2 * n; i++)
-        {
-            y.push_back(nums[i]);
-        }
-
-        vector<int> ans;
-
-        for(int i = 0; i < n; i++)
-        {
-            ans.push_back(x[i]);
-            ans.push_back(y[i]);
-        }
-
-        return ans;
+        return maxSum;
     }
 };
 
 int main()
 {
-    vector<int> nums = {2, 5, 1, 3, 4, 7};
-    int n = 3;
+    vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
     Solution obj;
 
-    vector<int> ans = obj.shuffle(nums, n);
-
-    cout << "Shuffled Array: ";
-
-    for(int x : ans)
-    {
-        cout << x << " ";
-    }
-
-    cout << endl;
+    cout << "Maximum Subarray Sum = "
+         << obj.maxSubarraySum(arr)
+         << endl;
 
     return 0;
 }
