@@ -1,5 +1,9 @@
-// ✅ Kadane's Algorithm
-// ✅ Maximum Subarray Sum
+// ✅ Arrays
+// ✅ Prefix Sum
+// ✅ Running Sum of 1D Array
+// ✅ LeetCode 1480
+
+
 
 
 
@@ -9,31 +13,31 @@ using namespace std;
 
 class Solution {
 public:
-    int maxSubarraySum(vector<int> &arr) {
+    vector<int> runningSum(vector<int>& nums) {
 
-        int currSum = arr[0];
-        int maxSum = arr[0];
-
-        for(int i = 1; i < arr.size(); i++) {
-
-            currSum = max(arr[i], currSum + arr[i]);
-
-            maxSum = max(maxSum, currSum);
+        for(int i = 1; i < nums.size(); i++)
+        {
+            nums[i] += nums[i - 1];
         }
 
-        return maxSum;
+        return nums;
     }
 };
 
 int main()
 {
-    vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    vector<int> nums = {1, 2, 3, 4};
 
     Solution obj;
 
-    cout << "Maximum Subarray Sum = "
-         << obj.maxSubarraySum(arr)
-         << endl;
+    vector<int> ans = obj.runningSum(nums);
+
+    cout << "Running Sum: ";
+
+    for(int x : ans)
+    {
+        cout << x << " ";
+    }
 
     return 0;
 }
