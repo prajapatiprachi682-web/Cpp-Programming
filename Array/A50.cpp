@@ -1,7 +1,7 @@
 // ✅ Arrays
-// ✅ Extra Array Technique
-// ✅ Positive & Negative Alternate Placement
-// ✅ LeetCode 2149
+// ✅ Counting Sort
+// ✅ Frequency Array
+// ✅ LeetCode 2164 - Sort Even and Odd Indices Independently
 
 
 
@@ -13,40 +13,52 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> rearrangeArray(vector<int>& nums) {
+    vector<int> sortEvenOdd(vector<int>& nums) {
 
-        int n = nums.size();
+        vector<int> evenFreq(101,0);
+        vector<int> oddFreq(101,0);
 
-        vector<int> ans(n);
-
-        int posidx = 0;
-        int negidx = 1;
-
-        for(int num : nums)
+        for(int i=0;i<nums.size();i++)
         {
-            if(num > 0)
-            {
-                ans[posidx] = num;
-                posidx += 2;
-            }
+            if(i%2==0)
+                evenFreq[nums[i]]++;
             else
+                oddFreq[nums[i]]++;
+        }
+
+        int idx = 0;
+
+        for(int val=1; val<=100; val++)
+        {
+            while(evenFreq[val]--)
             {
-                ans[negidx] = num;
-                negidx += 2;
+                nums[idx] = val;
+                idx += 2;
             }
         }
 
-        return ans;
+        idx = 1;
+
+        for(int val=100; val>=1; val--)
+        {
+            while(oddFreq[val]--)
+            {
+                nums[idx] = val;
+                idx += 2;
+            }
+        }
+
+        return nums;
     }
 };
 
 int main()
 {
-    vector<int> nums = {3,1,-2,-5,2,-4};
+    vector<int> nums = {4,1,2,3};
 
     Solution obj;
 
-    vector<int> ans = obj.rearrangeArray(nums);
+    vector<int> ans = obj.sortEvenOdd(nums);
 
     for(int x : ans)
     {
