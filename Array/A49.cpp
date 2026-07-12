@@ -1,7 +1,7 @@
 // ✅ Arrays
-// ✅ Prefix Sum
-// ✅ Running Sum of 1D Array
-// ✅ LeetCode 1480
+// ✅ Extra Array Technique
+// ✅ Positive & Negative Alternate Placement
+// ✅ LeetCode 2149
 
 
 
@@ -13,26 +13,40 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> runningSum(vector<int>& nums) {
+    vector<int> rearrangeArray(vector<int>& nums) {
 
-        for(int i = 1; i < nums.size(); i++)
+        int n = nums.size();
+
+        vector<int> ans(n);
+
+        int posidx = 0;
+        int negidx = 1;
+
+        for(int num : nums)
         {
-            nums[i] += nums[i - 1];
+            if(num > 0)
+            {
+                ans[posidx] = num;
+                posidx += 2;
+            }
+            else
+            {
+                ans[negidx] = num;
+                negidx += 2;
+            }
         }
 
-        return nums;
+        return ans;
     }
 };
 
 int main()
 {
-    vector<int> nums = {1, 2, 3, 4};
+    vector<int> nums = {3,1,-2,-5,2,-4};
 
     Solution obj;
 
-    vector<int> ans = obj.runningSum(nums);
-
-    cout << "Running Sum: ";
+    vector<int> ans = obj.rearrangeArray(nums);
 
     for(int x : ans)
     {
