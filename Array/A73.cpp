@@ -1,45 +1,71 @@
 // ✅ Arrays
-// ✅ Nested Loops
-// ✅ Brute Force
-// ✅ Count Smaller Elements After Self
-// ✅ Coding Ninjas - Count Number
+// ✅ Two Pointers
+// ✅ Greedy
+// ✅ Merge Traversal
+// ✅ GFG - Maximum Sum Path in Two Arrays
 
 
 
 
-
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<int> countNumber(int n, vector<int> &arr)
-{
-    vector<int> ans(n, 0);
+class Solution {
+public:
 
-    for(int i = 0; i < n; i++)
+    int maxPathSum(vector<int> &a, vector<int> &b)
     {
-        int cnt = 0;
+        int i = 0;
+        int j = 0;
 
-        for(int j = i + 1; j < n; j++)
+        long long sum1 = 0;
+        long long sum2 = 0;
+        long long ans = 0;
+
+        while(i < a.size() && j < b.size())
         {
-            if(arr[j] < arr[i])
-                cnt++;
+            if(a[i] < b[j])
+            {
+                sum1 += a[i];
+                i++;
+            }
+            else if(a[i] > b[j])
+            {
+                sum2 += b[j];
+                j++;
+            }
+            else
+            {
+                ans += max(sum1, sum2) + a[i];
+
+                sum1 = 0;
+                sum2 = 0;
+
+                i++;
+                j++;
+            }
         }
 
-        ans[i] = cnt;
-    }
+        while(i < a.size())
+            sum1 += a[i++];
 
-    return ans;
-}
+        while(j < b.size())
+            sum2 += b[j++];
+
+        ans += max(sum1, sum2);
+
+        return ans;
+    }
+};
 
 int main()
 {
-    vector<int> arr = {5,2,6,1};
+    vector<int> a = {2,3,7,10,12};
+    vector<int> b = {1,5,7,8};
 
-    vector<int> ans = countNumber(arr.size(), arr);
+    Solution obj;
 
-    for(int x : ans)
-        cout << x << " ";
+    cout << obj.maxPathSum(a, b);
 
     return 0;
 }
