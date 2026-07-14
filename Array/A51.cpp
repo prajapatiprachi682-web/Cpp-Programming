@@ -1,7 +1,8 @@
 // ✅ Arrays
-// ✅ Counting Sort
-// ✅ Frequency Array
-// ✅ LeetCode 2164 - Sort Even and Odd Indices Independently
+// ✅ Nested Loops
+// ✅ Brute Force
+// ✅ Count Smaller Elements After Self
+// ✅ Coding Ninjas - Count Number
 
 
 
@@ -11,59 +12,34 @@
 #include <vector>
 using namespace std;
 
-class Solution {
-public:
-    vector<int> sortEvenOdd(vector<int>& nums) {
+vector<int> countNumber(int n, vector<int> &arr)
+{
+    vector<int> ans(n, 0);
 
-        vector<int> evenFreq(101,0);
-        vector<int> oddFreq(101,0);
+    for(int i = 0; i < n; i++)
+    {
+        int cnt = 0;
 
-        for(int i=0;i<nums.size();i++)
+        for(int j = i + 1; j < n; j++)
         {
-            if(i%2==0)
-                evenFreq[nums[i]]++;
-            else
-                oddFreq[nums[i]]++;
+            if(arr[j] < arr[i])
+                cnt++;
         }
 
-        int idx = 0;
-
-        for(int val=1; val<=100; val++)
-        {
-            while(evenFreq[val]--)
-            {
-                nums[idx] = val;
-                idx += 2;
-            }
-        }
-
-        idx = 1;
-
-        for(int val=100; val>=1; val--)
-        {
-            while(oddFreq[val]--)
-            {
-                nums[idx] = val;
-                idx += 2;
-            }
-        }
-
-        return nums;
+        ans[i] = cnt;
     }
-};
+
+    return ans;
+}
 
 int main()
 {
-    vector<int> nums = {4,1,2,3};
+    vector<int> arr = {5,2,6,1};
 
-    Solution obj;
-
-    vector<int> ans = obj.sortEvenOdd(nums);
+    vector<int> ans = countNumber(arr.size(), arr);
 
     for(int x : ans)
-    {
         cout << x << " ";
-    }
 
     return 0;
 }
